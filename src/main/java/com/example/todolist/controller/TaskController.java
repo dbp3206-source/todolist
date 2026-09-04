@@ -87,7 +87,6 @@ public class TaskController {
     public ResponseEntity<Void> deleteTask(@PathVariable Long id){
         // Viec removeIf va xoa Task da chuyen sang Service
         boolean deleted = taskService.deleteTask(id);
-
         //removeIf ko chi xoa ma con return boolean xem co xoa dc ptu nao hay ko
         // hien tai removeIf nam trong Service, Controller chi nhan ket qua true / false
         if(deleted) return ResponseEntity.noContent().build(); // 204 no content
