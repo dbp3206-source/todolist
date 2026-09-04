@@ -43,7 +43,7 @@ public class TaskController {
 
     // Search bang tu khoa
     @GetMapping("/search")
-    public List<Task> searchTask(@RequestParam(required = false) String title){ // false nen phai xu ly null
+    public List<Task> searchTask(@RequestParam(required = false) String title){ // ko bat buoc dien title -> false nen phai xu ly null
         //Controller nhan tu khoa -> Service tim -> Controller return
         return taskService.searchTaskByTitle(title);
     }
@@ -76,31 +76,11 @@ public class TaskController {
     public ResponseEntity<Task> updateTask(@PathVariable Long id, @RequestBody Task newTask){
         // Viec tim task va update tung field da chuyen sang Service -> Controller nhan va return
         Task updatedTask = taskService.updateTask(id, newTask);
-
         if (updatedTask != null) return ResponseEntity.ok(updatedTask);
         // tim thay thi tra ve status: 200 va body: task
         return ResponseEntity.notFound().build();
         // ko tim thay thi tra ve status 404 (not Found), build la de hoan thien response
     }
-
-    /*
-    @PatchMapping("/{id}")
-    public ResponseEntity<Task> updatePartially(
-        @PathVariable Long id,
-        @RequestBody Task newTask
-            ) {
-
-        // Khi lam PATCH sau nay:
-        // Controller cung chi goi Service
-        Task updatedTask = taskService.updatePartially(id, newTask);
-
-        if (updatedTask != null) {
-            return ResponseEntity.ok(updatedTask);
-        }
-
-        return ResponseEntity.notFound().build();
-    }
-     */
 
     //DELETE
     @DeleteMapping("/{id}")
