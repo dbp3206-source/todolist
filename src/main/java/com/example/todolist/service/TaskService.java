@@ -45,7 +45,7 @@ public class TaskService {
 
     // tim task theo id
     public Task getTaskById(Long id) {
-        for (Task task : tasks) {
+        for (Task task: tasks) {
             if (task.getId().equals(id)) {
                 return task;
             }
@@ -57,10 +57,8 @@ public class TaskService {
     // loc task theo trang thai finished
     public List<Task> getTasksByStatus(boolean finished) {
         List<Task> status = new ArrayList<>();
-        for (Task task : tasks) {
-            if (task.isFinished() == finished) {
-                status.add(task);
-            }
+        for (Task task: tasks) {
+            if (task.isFinished() == finished) status.add(task);
         }
         return status;
     }
@@ -76,7 +74,7 @@ public class TaskService {
 
     // update task theo id
     public Task updateTask(Long id, Task newTask) {
-        for (Task task : tasks) {
+        for (Task task: tasks) {
             if (task.getId().equals(id)) { //update tung field neu khop
                 task.setTitle(newTask.getTitle());
                 task.setDescription(newTask.getDescription());
@@ -91,7 +89,7 @@ public class TaskService {
 
     // xoa task theo id
     public boolean deleteTask(Long id) {
-        boolean deleted = tasks.removeIf(task -> task.getId().equals(id)); // ko can duyet het task
+        boolean deleted = tasks.removeIf(task -> task.getId().equals(id)); // ko can duyet het task, chi can khop id la dc
         //removeIf ko chi xoa ma con return boolean xem co xoa dc ptu nao hay ko
         return deleted;
     }
@@ -99,7 +97,6 @@ public class TaskService {
     // tim task theo title
     public List<Task> searchTaskByTitle(String title){
         if(title == null || title.isBlank()) return tasks; // neu query parameter rong thi tra ve het
-
         String keyword = title.toLowerCase();
         //nhan vao String title -> filter (loc ra cac task co title ma chua keyword) -> chuyen thanh list
         return tasks.stream().filter(task->task.getTitle().toLowerCase().contains(keyword)).toList();
